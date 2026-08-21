@@ -59,3 +59,56 @@ Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 0  Solution :  Artificial Intelligence<br>
+
+<h2>PROGRAM </h2>
+
+```
+import random
+import string
+
+def generate_random_solution(answer):
+    l = len(answer)
+    return [random.choice(string.printable) for _ in range(l)]
+
+def evaluate(solution, answer):
+    print("Current solution:", "".join(solution))
+    target = list(answer)
+    diff = 0
+    for i in range(len(target)):
+        s = solution[i]
+        t = target[i]
+        diff += abs(ord(s) - ord(t))
+    return diff
+
+def mutate_solution(solution):
+    ind = random.randint(0, len(solution) - 1)
+    solution[ind] = random.choice(string.printable)
+    return solution
+
+def SimpleHillClimbing():
+    answer = "Artificial Intelligence"
+    best = generate_random_solution(answer)
+    best_score = evaluate(best, answer)
+    max_iterations = 1000
+    iterations = 0
+    while True:
+        print("Score:", best_score, "Solution:", "".join(best))
+        if best_score == 0:
+            break
+        if iterations >= max_iterations:
+            print("Max iterations reached.")
+            break
+        new_solution = mutate_solution(list(best))
+        score = evaluate(new_solution, answer)
+        if score < best_score:
+            best = new_solution
+            best_score = score
+        iterations += 1
+
+SimpleHillClimbing()
+
+```
+<H2>OUTPUT</H2>
+<img width="835" height="459" alt="image" src="https://github.com/user-attachments/assets/d16f8aaa-a819-4ef8-8127-5abc4eecdf23" />
+<h2>RESULT</h2>
+<p>we got the output successful</p>
